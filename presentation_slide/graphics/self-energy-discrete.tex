@@ -1,0 +1,37 @@
+%! TeX root = ../main.tex
+
+\begin{tikzpicture}
+    \begin{axis}[
+            width=70mm,
+            xlabel={pole locations},
+            ylabel={pole weights},
+            xmin=-3.3,
+            xmax=3.3,
+            ymin=10^(-2.5),
+            ymax=10^(0.9),
+            ymode=log,
+        ]
+        \addplot+ [only marks] table [x=locations, y=weights] {graphics/RAS_DMFT_insulator.csv};
+        \coordinate (c1) at (rel axis cs:1,1); % top right
+    \end{axis}
+
+    % inset
+    \begin{axis}[
+            at={(c1)},
+            anchor=north east,
+            width=38mm,
+            xmin=-3.3,
+            xmax=3.3,
+            ymin=0,
+            ymax=2,
+            no marks,
+            axis background/.style={fill=white}, % hide ticks from main axis
+            xtick=\empty,
+            ytick=\empty,
+            every axis plot/.append style={
+                    thick,
+                },
+        ]
+        \addplot+ table [x=omega, y=RAS_DMFT_insulator] {graphics/self-energies-spectra.csv};
+    \end{axis}
+\end{tikzpicture}

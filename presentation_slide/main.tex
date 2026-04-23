@@ -3,7 +3,40 @@
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{footline}{}
 
+% packages
+% font typesetting
+\usepackage{fontspec}
+\usepackage[main=english,ngerman]{babel}
+\usepackage{microtype}
+% math and science
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{siunitx}
+\usepackage[warnings-off={mathtools-colon,mathtools-overbracket}]{unicode-math} % load after ams
+\unimathsetup{math-style=ISO}
+% graphics
+\usepackage{float}
 \usepackage{graphicx}
+\usepackage{pgfplots}
+\usepgfplotslibrary{colorbrewer}
+\usepgfplotslibrary{groupplots}
+\pgfplotscreateplotcyclelist{mylist}{
+    {index of colormap={0 of Set1}, mark=o},
+    {index of colormap={1 of Set1}, mark=o}
+}
+\pgfplotsset{
+    compat=1.18,
+    table/col sep=comma,
+    cycle list/Set1,
+    colormap/Set1,
+    cycle list name=mylist,
+}
+\usepackage{tikz}
+\usetikzlibrary{
+    external,
+}
+\usepackage{xcolor}
 
 \begin{document}
 
@@ -12,15 +45,9 @@
     \begin{columns}
 
         \column{0.5\textwidth}
-        \begin{figure}
-            \centering
-            \includegraphics[width=0.6\linewidth]{example-image-a}
-        \end{figure}
-        \vspace{0.3cm}
-        \begin{figure}
-            \centering
-            \includegraphics[width=0.6\linewidth]{example-image-b}
-        \end{figure}
+        \begin{center}
+            \input{graphics/self-energy-discrete.tex}
+        \end{center}
 
         \column{0.5\textwidth}
         Frank Ebel, TU Wien
