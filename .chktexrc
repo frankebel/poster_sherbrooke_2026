@@ -1,0 +1,6 @@
+# https://www.nongnu.org/chktex
+
+CmdLine
+{
+    --nowarn 3
+}
