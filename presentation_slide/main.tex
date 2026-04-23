@@ -38,6 +38,10 @@
 }
 \usepackage{xcolor}
 
+% custom commands
+\AtBeginDocument{\renewcommand\Re{\mathrm{Re}}}
+\AtBeginDocument{\renewcommand\Im{\mathrm{Im}}}
+
 \begin{document}
 
 \begin{frame}{Causal discrete self-energy in DMFT}
@@ -52,9 +56,15 @@
         \column{0.5\textwidth}
         Frank Ebel, TU Wien
         \begin{itemize}
-            \item item 1
-            \item item 2
-            \item item 3
+            \item discrete real-frequency solvers
+                  have issues extracting self-energy
+                  \begin{equation*}
+                      \Sigma(\omega) = G_0^{-1}(\omega) - G^{-1}(\omega)
+                  \end{equation*}
+            \item new method guarantees causality
+                  \begin{equation*}
+                      \Im \, \Sigma(z) \le 0
+                  \end{equation*}
         \end{itemize}
 
     \end{columns}
