@@ -47,8 +47,8 @@
 \begin{document}
 
 \begin{frame}{
-        Causal discrete self-energy in real-frequency DMFT \\
-        \normalsize{\underline{Frank T.\ Ebel}, Karsten Held}
+        Discrete self-energy in real-frequency DMFT \\
+        \normalsize{\hspace{0.5mm} \underline{Frank T.\ Ebel}, Zacinskis, Pelz, Kugler, Held, von Delft, Haverkort, Gleis}
     }
 
     \begin{columns}
@@ -65,18 +65,24 @@
                   \begin{equation*}
                       \Sigma(\omega) = G_0^{-1}(\omega) - G^{-1}(\omega)
                   \end{equation*}
-            \item New method guarantees causality
+            \item Reformulation of symmetric estimator
                   \begin{equation*}
-                      \Im \, \Sigma(\omega) \le 0
+                      \Sigma(\omega)
+                      =
+                      \Sigma^\mathrm{HF}
+                      +
+                      \left(\left[\widetilde{G}^{-1}(\omega)\right]_{22}\right)^{-1} % chktex 3
                   \end{equation*}
+                  guarantees causality
         \end{itemize}
 
         \vspace{5mm}
 
         \hspace{10mm}
-        \includegraphics[height=15mm]{graphics/tu.pdf}
-        \hspace{10mm}
-        \includegraphics[height=15mm]{graphics/quast.png}
+        \includegraphics[height=10mm]{graphics/tu.pdf}
+        \hspace{2mm}
+        \includegraphics[height=10mm]{graphics/quast.png}
+        \includegraphics[height=10mm]{graphics/fwf.pdf}
 
     \end{columns}
 
