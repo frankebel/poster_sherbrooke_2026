@@ -33,7 +33,7 @@
         ]
         \addplot+ [only marks] table [x=locations, y=weights] {graphics/self-energy-discrete/RAS_DMFT_metal.csv};
         \addplot+ [only marks] table [x=locations, y=weights] {graphics/self-energy-discrete/Quanty_DiscreteSigma_Metal.csv};
-        \node[anchor=north west] at (rel axis cs:0.02, 0.98) {(a) $U/D = 2$};
+        \node[anchor=north west] at (rel axis cs:0.02, 0.98) {$U/D = 2$};
         \coordinate (c1) at (rel axis cs:1,1); % top right
 
         \nextgroupplot[
@@ -44,7 +44,7 @@
         \addlegendentry{\texttt{RAS\_DMFT.jl}}
         \addplot+ [only marks] table [x=locations, y=weights] {graphics/self-energy-discrete/Quanty_DiscreteSigma_Insulator.csv};
         \addlegendentry{\textsc{Quanty}}
-        \node[anchor=north west] at (rel axis cs:0.02, 0.98) {(b) $U/D = 4$};
+        \node[anchor=north west] at (rel axis cs:0.02, 0.98) {$U/D = 4$};
         \coordinate (c2) at (rel axis cs:1,1); % top right
 
     \end{groupplot}
