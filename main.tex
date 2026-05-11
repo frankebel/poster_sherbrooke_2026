@@ -44,7 +44,12 @@ A.\ Gleis\textsuperscript{5}
 \usepackage{pgfplots}
 \usepgfplotslibrary{colorbrewer}
 \usepgfplotslibrary{groupplots}
- \pgfplotscreateplotcyclelist{mylist}{
+\pgfplotscreateplotcyclelist{twolist}{
+    {index of colormap={1 of Set1}, mark=o},
+    {index of colormap={0 of Set1}, mark=x} % <-- don't add a comma here
+}
+\pgfplotscreateplotcyclelist{threelist}{
+    {index of colormap={2 of Set1}, mark=square},
     {index of colormap={1 of Set1}, mark=o},
     {index of colormap={0 of Set1}, mark=x} % <-- don't add a comma here
 }
@@ -52,7 +57,6 @@ A.\ Gleis\textsuperscript{5}
     compat=1.18,
     cycle list/Set1,
     colormap/Set1,
-    cycle list name=mylist,
     table/col sep=comma,
     every axis/.append style=
     {
@@ -259,6 +263,25 @@ A.\ Gleis\textsuperscript{5}
         Discrete self-energy spectrum $-\frac{1}{\muppi}\Im \Sigma(\omega + \I0^+) = \sum_i W_i'' \delta(\omega - E_i'')$
         \begin{center}
             \input{graphics/self-energy-discrete/self-energy-discrete.tex}
+        \end{center}
+    }
+
+    \posterbox[adjusted title=Double occupation and quasiparticle weight]{
+        name=docc-and-qp,
+        column*=2,
+        span=\rcol,
+        below=self-energy,
+    }{
+        Calculate analytical derivative
+        \begin{equation*}
+            Z
+            =
+            \left(\mathbb{1} - \left.\frac{\partial \Re \Sigma(z)}{\partial z}\right|_{z=0} \right)^{-1}
+            =
+            \lim_{\lambda \to 0}\left(\mathbb{1} + \sum_i \frac{W_i''}{E_i''^2 + \lambda^2} \right)^{-1}
+        \end{equation*}
+        \begin{center}
+            \input{graphics/docc-and-qp/docc-and-qp.tex}
         \end{center}
     }
 

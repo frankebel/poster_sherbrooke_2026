@@ -1,0 +1,71 @@
+%! TeX root = ../../main.tex
+
+\begin{tikzpicture}
+    \begin{groupplot}[
+            group style={
+                    group size=2 by 1,
+                    horizontal sep=100pt,
+                },
+            width=0.45\textwidth,
+            xlabel=$U/D$,
+            xmin=0,
+            ymin=0,
+            ymax=1,
+            xtick distance = 1,
+            every axis plot/.append style={
+                    line width=3pt,
+                    mark size=6pt,
+                },
+            cycle list name=threelist,
+        ]
+
+        \nextgroupplot[
+            ylabel=$4 \langle n_\uparrow n_\downarrow \rangle$,
+            xmax=4.0,
+            y filter/.code={
+                    \pgfmathmultiply{#1}{4} % set y scale [0, 1] not [0, 0.25]
+                },
+        ]
+        % metal
+        \addplot+ table [x=U, y=NRG_metal] {graphics/docc-and-qp/double-occupation.csv};
+        \addplot+ table [x=U, y=RAS_DMFT_metal] {graphics/docc-and-qp/double-occupation.csv};
+        \addplot+ table [x=U, y=Quanty_metal] {graphics/docc-and-qp/double-occupation.csv};
+        % insulator
+        \pgfplotsset{cycle list shift=-3} % reset list
+        \addplot+ table [x=U, y=NRG_insulator] {graphics/docc-and-qp/double-occupation.csv};
+        \addplot+ table [x=U, y=RAS_DMFT_insulator] {graphics/docc-and-qp/double-occupation.csv};
+        \addplot+ table [x=U, y=Quanty_insulator] {graphics/docc-and-qp/double-occupation.csv};
+
+        \nextgroupplot[
+            name=main,
+            ylabel=$Z$,
+            xmax=3.0,
+        ]
+        \addplot+ table [x=U, y=NRG] {graphics/docc-and-qp/quasiparticle-weight.csv};
+        \label{plot:MuNRG}
+        \addplot+ table [x=U, y=Julia] {graphics/docc-and-qp/quasiparticle-weight.csv};
+        \label{plot:RASDMFT}
+        \addplot+ table [x=U, y=Quanty] {graphics/docc-and-qp/quasiparticle-weight.csv};
+        \label{plot:Quanty}
+        \addplot+[
+            domain=0:1.9,
+            samples=200,
+            mark=none,
+            dashed,
+            black,
+        ]
+        {1 - 1.307*(x/2)^2 + 0.969*(x/2)^4}; % Eq. 113 in  10.1140/epjb/e2004-00005-5
+        \label{plot:PT}
+        \node[
+            inner sep=0pt,
+            below left=30pt,
+            anchor=north east,
+        ] at (rel axis cs:1,1){
+            \begin{tabular}{cl}
+                \rule{0pt}{1em} \ref{plot:Quanty}  & \hspace{-10pt}\textsc{Quanty}                \\
+                \rule{0pt}{1em} \ref{plot:RASDMFT} & \hspace{-10pt}\texttt{RAS\_DMFT.jl}          \\
+                \rule{0pt}{1em} \ref{plot:MuNRG}   & \hspace{-10pt}MuNRG                          \\
+                \rule{0pt}{1em} \ref{plot:PT}      & \hspace{-10pt}PT $O(U^4)$ \cite{Gebhard2003}
+            \end{tabular}};
+    \end{groupplot}
+\end{tikzpicture}

@@ -4,10 +4,10 @@
     \begin{groupplot}[
             group style={
                     group size=2 by 1,
-                    horizontal sep=90pt,
+                    horizontal sep=100pt,
                 },
             width=0.45\textwidth,
-            xlabel=$\epsilon_i''/D$,
+            xlabel=$E_i''/D$,
             xmin=-3.3,
             xmax=3.3,
             xtick distance = 1,
@@ -22,11 +22,12 @@
             every axis plot/.append style={
                     line width=3pt,
                     mark size=6pt,
-                }
+                },
+            cycle list name=twolist,
         ]
 
         \nextgroupplot[
-            ylabel=$w_i''/D^2$,
+            ylabel=$W_i''/D^2$,
             ymin=10^(-3),
             ymax=10^(-1),
         ]
