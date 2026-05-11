@@ -173,20 +173,19 @@ A.\ Gleis\textsuperscript{5}
     }{
         \begin{itemize}[leftmargin=*]
             \item Correlators are described by \myemph{discrete spectral representation} (DSR)
-                  \begin{align*}
+                  \begin{equation*}
                       G_0(z) = \frac{1}{z - E_0 - \underbrace{\sum_i V_i^\dag \frac{1}{z - E_i} V_i}_{\scalebox{1.0}{$\Delta(z)$}}}
-                  \end{align*}
+                  \end{equation*}
                   with energies $E_i \in \mathbb{C}^{N \times N}$
                   and weights $W_i = V_i^\dag V_i \in \mathbb{C}^{N \times N}$
-            \item \myemph{Dyson equation} $\Sigma(z) = G_0^{-1}(z) - G^{-1}(z)$
-                  does not guarantee causality \myemph{$-\Im \Sigma(z) \ge 0$} numerically
-            \item \myemph{Idea}: Use equation of motion (EOM) to calculate DSR of self-energy
+            \item \myemph{Dyson equation} does \myemph{not guarantee causality} numerically
+            \item \myemph{Idea}: Use equation of motion to calculate DSR of self-energy
                   \begin{align*}
                       \Sigma(z) = \Sigma^\mathrm{HF} + \sum_i \frac{W_i''}{z - E_i''}
                   \end{align*}
             \item \myemph{Goal}:
                   Benchmark different implementations
-                  on the real axis $z = \omega + \I0^+$
+                  on the real axis
                   at $T=0$
                   on the $d \to \infty$ Bethe lattice
         \end{itemize}
