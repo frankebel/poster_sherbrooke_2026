@@ -106,7 +106,8 @@ A.\ Gleis\textsuperscript{5}
 \newcommand{\pk}{\vphantom{k}}
 \newcommand{\pdag}{\vphantom{\dag}}
 \newcommand{\ps}{\vphantom{*}}
-\newcommand{\cemph}[1]{\textcolor{tublue}{#1}} % color emphasize
+\newcommand{\I}{\mathrm{i}}
+\newcommand{\myemph}[1]{\textbf{#1}} % custom emphasize
 
 \begin{document}
 
@@ -154,6 +155,33 @@ A.\ Gleis\textsuperscript{5}
             \textsuperscript{5}Rutgers University, USA                                  &
             \textsuperscript{*}frank.ebel@tuwien.ac.at
         \end{tabular}
+    }
+
+    \posterbox[adjusted title=Problem]{
+        name=problem,
+        column=1,
+        span=\lcol,
+        below=title,
+    }{
+        \begin{itemize}[leftmargin=*]
+            \item Correlators are described by \myemph{discrete spectral representation} (DSR)
+                  \begin{align*}
+                      G_0(z) = \frac{1}{z - E_0 - \underbrace{\sum_i V_i^\dag \frac{1}{z - E_i} V_i}_{\scalebox{1.0}{$\Delta(z)$}}}
+                  \end{align*}
+                  with energies $E_i \in \mathbb{C}^{N \times N}$
+                  and weights $W_i = V_i^\dag V_i \in \mathbb{C}^{N \times N}$
+            \item \myemph{Dyson equation} $\Sigma(z) = G_0^{-1}(z) - G^{-1}(z)$
+                  does not guarantee causality \myemph{$-\Im \Sigma(z) \ge 0$} numerically
+            \item \myemph{Idea}: Use equation of motion (EOM) to calculate DSR of self-energy
+                  \begin{align*}
+                      \Sigma(z) = \Sigma^\mathrm{HF} + \sum_i \frac{W_i''}{z - E_i''}
+                  \end{align*}
+            \item \myemph{Goal}:
+                  Benchmark different implementations
+                  on the real axis $z = \omega + \I0^+$
+                  at $T=0$
+                  on the $d \to \infty$ Bethe lattice
+        \end{itemize}
     }
 
 \end{tcbposter}
