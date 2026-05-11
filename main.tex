@@ -107,6 +107,7 @@ A.\ Gleis\textsuperscript{5}
 \newcommand{\pdag}{\vphantom{\dag}}
 \newcommand{\ps}{\vphantom{*}}
 \newcommand{\I}{\mathrm{i}}
+\newcommand{\tG}{\widetilde{G}}
 \newcommand{\myemph}[1]{\textbf{#1}} % custom emphasize
 
 \begin{document}
@@ -182,6 +183,74 @@ A.\ Gleis\textsuperscript{5}
                   at $T=0$
                   on the $d \to \infty$ Bethe lattice
         \end{itemize}
+    }
+
+    \posterbox[adjusted title=Method]{
+        name=method,
+        column*=2,
+        span=\rcol,
+        below=title,
+    }{
+        \begin{itemize}[leftmargin=*]
+            \item Use interacting Hamiltonian $H_1$ to define auxiliary operator $q \coloneq [c, H_1]$. \\
+                  Calculate propagator
+                  \begin{equation*}
+                      \tG(z)
+                      =
+                      \begin{pmatrix}
+                          \tG_{11} & \tG_{12} \\
+                          \tG_{21} & \tG_{22}
+                      \end{pmatrix}
+                      \coloneq
+                      \begin{pmatrix}
+                          \lAngle c, c^\dag \rAngle & \lAngle c, q^\dag \rAngle \\
+                          \lAngle q, c^\dag \rAngle & \lAngle q, q^\dag \rAngle \\
+                      \end{pmatrix}
+                      \qquad
+                  \end{equation*}
+                  with Lehmann representation
+                  $\lAngle A, B^\dag \rAngle \propto \sum_{mn} \langle n | A | m \rangle \langle m | B^\dag | n \rangle$ \\
+                  and static term
+                  $\Sigma^\mathrm{HF} = \langle \{ c, q^\dag \} \rangle = \langle \{ q, c^\dag \} \rangle$
+            \item \citeauthor{Kugler2022} showed~\cite{Kugler2022}
+                  \begin{equation*}
+                      \Sigma(z)
+                      =
+                      \Sigma^\mathrm{HF} + \tG_{22}(z)  - \tG_{21}(z) \frac{1}{\tG_{11}(z)} \tG_{12}(z)
+                  \end{equation*}
+            \item \myemph{New Method}~\cite{Zacinskis2026}: Use Schur complement
+                  \begin{equation*}
+                      \left[
+                          \tG^{-1}(z)
+                          \right]_{22}
+                      =
+                      \left[
+                          \begin{pmatrix}
+                              \tG_{11} & \tG_{12} \\
+                              \tG_{21} & \tG_{22}
+                          \end{pmatrix}^{-1}
+                          \right]_{22}
+                      =
+                      \left(
+                      \tG_{22}  - \tG_{21} \frac{1}{\tG_{11} }  \tG_{12}
+                      \right)^{-1}
+                  \end{equation*}
+                  to guarantee causal self-energy
+                  \begin{equation*}
+                      \Sigma(z)
+                      =
+                      \Sigma^\mathrm{HF} + \left( \bigl[\tG^{-1}(z) \bigr]_{22} \right)^{-1}
+                  \end{equation*}
+        \end{itemize}
+    }
+
+    \posterbox[adjusted title=References]{
+        name=references,
+        column=1,
+        span=\lcol,
+        between=problem and bottom,
+    }{
+        \printbibliography[heading=none]
     }
 
 \end{tcbposter}
