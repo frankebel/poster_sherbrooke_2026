@@ -1,0 +1,161 @@
+\documentclass{article}
+
+\usepackage[a0paper,portrait]{geometry}
+\usepackage[poster]{tcolorbox}
+\pagestyle{empty}
+\def\lcol{0.8} % width of left column
+\def\rcol{1.2} % width of right column
+
+
+\title{Symmetric estimator for discrete self-energy of discrete many-body systems}
+\author{
+A.\ Zacinskis\textsuperscript{1},
+\underline{F.\ T.\ Ebel}\textsuperscript{2*},
+M.\ Pelz\textsuperscript{3},
+F.\ B.\ Kugler\textsuperscript{4}, \\
+K.\ Held\textsuperscript{2},
+J.\ von Delft\textsuperscript{3},
+M.\ W. Haverkort\textsuperscript{1},
+A.\ Gleis\textsuperscript{5}
+}
+
+% font, typesetting
+\usepackage[fontsize=35]{fontsize}
+\usepackage{fontspec}
+\usepackage{enumitem}
+\setitemize{itemsep=1pt}
+\usepackage[main=english]{babel}
+\usepackage{microtype}
+\usepackage{pdfrender}
+\usepackage{pifont} %cross
+\setmainfont{Noto Sans}
+
+% math and science typesetting
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage[warnings-off={mathtools-colon,mathtools-overbracket}]{unicode-math} % load after ams
+\unimathsetup{math-style=ISO}
+\setmathfont{Noto Sans Math}
+
+% graphics, colors, captions, tables
+\usepackage{caption}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{pgfplots}
+\usepgfplotslibrary{colorbrewer}
+\usepgfplotslibrary{groupplots}
+\pgfplotsset{
+    compat=1.18,
+    cycle list/Set1,
+    every axis/.append style=
+    {
+        line width=4pt,
+        legend style={
+            draw=none,
+        },
+        ylabel shift=-0.5em,
+    },
+    every axis plot/.append style=
+    {
+        line width=5pt,
+    },
+    every tick/.append style=
+    {
+        color=black,
+        line width=3pt,
+    },
+}
+\usepackage{pgfplotstable}
+\pgfplotstableset{col sep=comma}
+\usepackage[labelformat=simple]{subcaption}
+\usepackage{tabularx}
+\usepackage{tikz}
+\usetikzlibrary{
+    arrows.meta,
+    fit,
+    positioning,
+    shapes.symbols,
+}
+\tikzset{font={\fontsize{30pt}{2}\selectfont}}
+\usepackage{xcolor}
+\definecolor{tublue}{RGB}{0,102,153}
+\definecolor{tulightblue}{RGB}{166,213,236}
+
+% references, bibliography, and links
+\usepackage[
+    backend=biber,
+    style=phys,
+    biblabel=brackets,
+    maxnames=2,
+]{biblatex}
+\usepackage{csquotes} % required by biblatex
+\usepackage{hyperref}
+\addbibresource{ref.bib}
+\AtEveryBibitem{\clearfield{title}} % don't print title
+\hypersetup{
+    hidelinks,
+    breaklinks=true,
+    pdftitle=\UseName{@title},
+    pdfauthor={Frank T.\ Ebel},
+}
+
+% commands
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}%
+\AtBeginDocument{\renewcommand\Re{\mathrm{Re}\>}}
+\AtBeginDocument{\renewcommand\Im{\mathrm{Im}\>}}
+\newcommand{\pk}{\vphantom{k}}
+\newcommand{\pdag}{\vphantom{\dag}}
+\newcommand{\ps}{\vphantom{*}}
+\newcommand{\cemph}[1]{\textcolor{tublue}{#1}} % color emphasize
+
+\begin{document}
+
+\begin{tcbposter}[
+        coverage={
+                spread,
+                interior style={color=tublue!40}, % background color
+            },
+        poster={
+                % showframe,
+                rows=5,
+                columns=2,
+                spacing=1cm,
+            },
+        boxes={
+                arc=20mm,
+                boxsep=20pt,
+                colback=white,
+                title style={left color=tublue, right color=tublue!60}, % gradient
+                % fonttitle=\bfseries\Large,
+                drop fuzzy shadow=black,
+                left=0.6em,
+                right=0.6em,
+            },
+    ]
+
+    \posterbox[
+        halign=center,
+        valign=center,
+    ]{
+        name=title,
+        column=1,
+        span=2,
+        below=top,
+    }{
+        {\bfseries\Huge\setlength{\spaceskip}{0.3em}\UseName{@title}}\\
+        \vspace{10mm}
+        {\bfseries\Large\UseName{@author}}\\
+        \vspace{10mm}
+        \begin{tabular}{ l l l }
+            \textsuperscript{1}Heidelberg University, Germany \hspace{10pt}             &
+            \textsuperscript{2}\foreignlanguage{german}{TU Wien}, Austria \hspace{10pt} &
+            \textsuperscript{3}\foreignlanguage{german}{LMU München}, Germany \hspace{10pt} \\
+            \textsuperscript{4}University of Cologne, Germany \hspace{10pt}             &
+            \textsuperscript{5}Rutgers University, USA                                  &
+            \textsuperscript{*}frank.ebel@tuwien.ac.at
+        \end{tabular}
+    }
+
+\end{tcbposter}
+
+\end{document}
