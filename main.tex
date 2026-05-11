@@ -44,9 +44,16 @@ A.\ Gleis\textsuperscript{5}
 \usepackage{pgfplots}
 \usepgfplotslibrary{colorbrewer}
 \usepgfplotslibrary{groupplots}
+ \pgfplotscreateplotcyclelist{mylist}{
+    {index of colormap={1 of Set1}, mark=o},
+    {index of colormap={0 of Set1}, mark=x} % <-- don't add a comma here
+}
 \pgfplotsset{
     compat=1.18,
     cycle list/Set1,
+    colormap/Set1,
+    cycle list name=mylist,
+    table/col sep=comma,
     every axis/.append style=
     {
         line width=4pt,
@@ -242,6 +249,18 @@ A.\ Gleis\textsuperscript{5}
                       \Sigma^\mathrm{HF} + \left( \bigl[\tG^{-1}(z) \bigr]_{22} \right)^{-1}
                   \end{equation*}
         \end{itemize}
+    }
+
+    \posterbox[adjusted title=Self-energy $\Sigma(\omega + \I0^+)$]{
+        name=self-energy,
+        column*=2,
+        span=\rcol,
+        below=method,
+    }{
+        Discrete self-energy spectrum $-\frac{1}{\muppi}\Im \Sigma(\omega + \I0^+) = \sum_i W_i'' \delta(\omega - E_i'')$
+        \begin{center}
+            \input{graphics/self-energy-discrete/self-energy-discrete.tex}
+        \end{center}
     }
 
     \posterbox[adjusted title=References]{
