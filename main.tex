@@ -117,9 +117,17 @@ A.\ Gleis\textsuperscript{5}
 \newcommand{\pk}{\vphantom{k}}
 \newcommand{\pdag}{\vphantom{\dag}}
 \newcommand{\ps}{\vphantom{*}}
+\newcommand{\D}{\mathrm{d}}
+\newcommand{\HF}{\mathrm{HF}}
 \newcommand{\I}{\mathrm{i}}
 \newcommand{\tG}{\widetilde{G}}
+\newcommand{\tS}{\widetilde{S}}
 \newcommand{\myemph}[1]{\textbf{#1}} % custom emphasize
+
+% bra-ket
+\DeclarePairedDelimiter\expval{\langle}{\rangle}%
+\DeclarePairedDelimiterX\lehmann[2]{\lAngle}{\rAngle}{#1,#2}%
+\DeclarePairedDelimiterX\sandwich[3]{\langle}{\rangle}{#1\delimsize\vert\mathopen{}#2\delimsize\vert\mathopen{}#3}%
 
 \begin{document}
 
@@ -185,7 +193,7 @@ A.\ Gleis\textsuperscript{5}
             \item \myemph{Dyson equation} does \myemph{not guarantee causality} numerically
             \item \myemph{Idea}: Use equation of motion to calculate DSR of self-energy
                   \begin{align*}
-                      \Sigma(z) = \Sigma^\mathrm{HF} + \sum_i \frac{W_i''}{z - E_i''}
+                      \Sigma(z) = \Sigma^\HF + \sum_i \frac{W_i''}{z - E_i''}
                   \end{align*}
             \item \myemph{Goal}:
                   Benchmark different implementations
@@ -213,20 +221,20 @@ A.\ Gleis\textsuperscript{5}
                       \end{pmatrix}
                       \coloneq
                       \begin{pmatrix}
-                          \lAngle c, c^\dag \rAngle & \lAngle c, q^\dag \rAngle \\
-                          \lAngle q, c^\dag \rAngle & \lAngle q, q^\dag \rAngle \\
+                          \lehmann{c}{c^\dag} & \lehmann{c}{q^\dag} \\
+                          \lehmann{q}{c^\dag} & \lehmann{q}{q^\dag}
                       \end{pmatrix}
                       \qquad
                   \end{equation*}
                   with Lehmann representation
-                  $\lAngle A, B^\dag \rAngle \propto \sum_{mn} \langle n | A | m \rangle \langle m | B^\dag | n \rangle$ \\
+                  $\lAngle A, B^\dag \rAngle \propto \sum_{mn} \sandwich{n}{A}{m} \sandwich{m}{B^\dag}{n}$ \\
                   and static term
-                  $\Sigma^\mathrm{HF} = \langle \{ c, q^\dag \} \rangle = \langle \{ q, c^\dag \} \rangle$
+                  $\Sigma^\HF = \expval{\{c,q^\dag\}} = \expval{\{q,c^\dag\}}$
             \item \citeauthor{Kugler2022} showed~\cite{Kugler2022}
                   \begin{equation*}
                       \Sigma(z)
                       =
-                      \Sigma^\mathrm{HF} + \tG_{22}(z)  - \tG_{21}(z) \frac{1}{\tG_{11}(z)} \tG_{12}(z)
+                      \Sigma^\HF + \tG_{22}(z)  - \tG_{21}(z) \frac{1}{\tG_{11}(z)} \tG_{12}(z)
                   \end{equation*}
             \item \myemph{New Method}~\cite{Zacinskis2026}: Use Schur complement
                   \begin{equation*}
@@ -249,9 +257,30 @@ A.\ Gleis\textsuperscript{5}
                   \begin{equation*}
                       \Sigma(z)
                       =
-                      \Sigma^\mathrm{HF} + \left( \bigl[\tG^{-1}(z) \bigr]_{22} \right)^{-1}
+                      \Sigma^\HF + \left( \bigl[\tG^{-1}(z) \bigr]_{22} \right)^{-1}
                   \end{equation*}
         \end{itemize}
+    }
+
+    \posterbox[adjusted title=Numerical Discussion]{
+        name=numerical-discussion,
+        column=1,
+        span=\lcol,
+        below=problem,
+    }{
+        Weight matrix
+        \begin{equation*}
+            \tS
+            =
+            -\frac{1}{\muppi} \int_{-\infty}^{\infty} \D\omega~\tG(\omega + \I0^+)
+            =
+            \begin{pmatrix}
+                \mathbb{1} & \Sigma^\HF            \\
+                \Sigma^\HF & \expval{\{q,q^\dag\}}
+            \end{pmatrix}
+            \succeq 0 \, .
+        \end{equation*}
+        Inversion, projection to 22 block, and reinversion preserve positive semidefiniteness.
     }
 
     \posterbox[adjusted title=Self-energy $\Sigma(\omega + \I0^+)$]{
@@ -302,7 +331,7 @@ A.\ Gleis\textsuperscript{5}
         name=references,
         column=1,
         span=\lcol,
-        between=problem and bottom,
+        between=numerical-discussion and bottom,
     }{
         \printbibliography[heading=none]
     }
