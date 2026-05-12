@@ -196,23 +196,23 @@ A.\ Gleis\textsuperscript{5}
                       H_1
                        & =
                       \sum_{1234 \, \in \, \mathrm{imp}} U_{1234} c_1^\dag c_2^\dag c_3 c_4
-                      -  \sum_{12 \, \in \, \mathrm{imp}} U_{12}^\mathrm{MF} c_1^\dag c_2
+                      -  \sum_{12 \, \in \, \mathrm{imp}} U_{12}^\mathrm{MF} c_1^\dag c_2 \, .
                   \end{align*}
             \item Correlators are described by \myemph{discrete spectral representation} (DSR)
                   \begin{equation*}
-                      G_0(z) = \frac{1}{z - E_\mathrm{imp} - \underbrace{\sum_j V_j^\dag \frac{1}{z - E_j} V_j}_{\scalebox{1.0}{$\Delta_0(z)$}}}
+                      G_0(z) = \frac{1}{z - E_\mathrm{imp} - \underbrace{\sum_j V_j^\dag \frac{1}{z - E_j} V_j}_{\scalebox{1.0}{$\Delta_0(z)$}}} \, .
                   \end{equation*}
-            \item \myemph{Dyson equation} does \myemph{not guarantee causality} numerically
+            \item \myemph{Dyson equation} does \myemph{not guarantee causality} numerically.
             \item \myemph{Idea}: Use equation of motion to calculate DSR of self-energy
                   \begin{align*}
                       \Sigma(z) = \Sigma^\HF + \sum_j \frac{W_j''}{z - E_j''}
                   \end{align*}
-                  with weights $W_j'' = (V_j'')^\dag V_j''$
+                  with weights $W_j'' = (V_j'')^\dag V_j''$.
             \item \myemph{Goal}:
                   Benchmark different implementations
                   on the real axis
                   at $T=0$
-                  on the $d \to \infty$ Bethe lattice
+                  on the $d \to \infty$ Bethe lattice.
         \end{itemize}
     }
 
@@ -242,12 +242,12 @@ A.\ Gleis\textsuperscript{5}
                   with Lehmann representation
                   $\lAngle A, B^\dag \rAngle \propto \sum_{mn} \sandwich{n}{A}{m} \sandwich{m}{B^\dag}{n}$ \\
                   and static term
-                  $\Sigma^\HF = \expval{\{c_\mathrm{imp},q^\dag\}} = \expval{\{q,c_\mathrm{imp}^\dag\}}$
+                  $\Sigma^\HF = \expval{\{c_\mathrm{imp},q^\dag\}} = \expval{\{q,c_\mathrm{imp}^\dag\}}$.
             \item \citeauthor{Kugler2022} showed~\cite{Kugler2022}
                   \begin{equation*}
                       \Sigma(z)
                       =
-                      \Sigma^\HF + \tG_{22}(z)  - \tG_{21}(z) \frac{1}{\tG_{11}(z)} \tG_{12}(z)
+                      \Sigma^\HF + \tG_{22}(z)  - \tG_{21}(z) \frac{1}{\tG_{11}(z)} \tG_{12}(z) \, .
                   \end{equation*}
             \item \myemph{New Method}: Use Schur complement
                   \begin{equation*}
@@ -270,7 +270,7 @@ A.\ Gleis\textsuperscript{5}
                   \begin{equation*}
                       \Sigma(z)
                       =
-                      \Sigma^\HF + \left( \bigl[\tG^{-1}(z) \bigr]_{22} \right)^{-1}
+                      \Sigma^\HF + \left( \bigl[\tG^{-1}(z) \bigr]_{22} \right)^{-1} \, .
                   \end{equation*}
         \end{itemize}
     }
