@@ -4,3 +4,8 @@ CmdLine
 {
     --nowarn 3
 }
+
+Silent
+{
+    \node
+}

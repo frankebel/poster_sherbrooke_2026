@@ -1,1 +1,11 @@
+{"rule":"EN_CONTRACTION_SPELLING","sentence":"^\\QRe Im\\E$"}
 {"rule":"MORFOLOGIK_RULE_EN_US","sentence":"J. von Delft"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\Qcolorbrewer groupplots twolist index of colormap=1 of Set1, mark=o, index of colormap=0 of Set1, mark=x threelist index of colormap=2 of Set1, mark=square, index of colormap=1 of Set1, mark=o, index of colormap=0 of Set1, mark=x col sep=comma\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"between=docc-and-qp"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"halign=center"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"math-style=ISO Noto Sans Math"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"name=docc-and-qp"}
+{"rule":"MULTIPLICATION_SIGN","sentence":"F. T. Ebel2*"}
+{"rule":"SPACE_BETWEEN_NUMBER_AND_WORD","sentence":"5Rutgers University"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"math-style=ISO Noto Sans Math"}
+{"rule":"WHITESPACE_RULE","sentence":"^\\Q[2]  #1,#2[3]  #1#2#3\\E$"}

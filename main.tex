@@ -149,18 +149,18 @@ A.\ Gleis\textsuperscript{5}
         halign=center,
         valign=center,
         overlay={
-                \node (qr) [anchor=west,inner sep=0pt]
+                \node (qr) [anchor=west, inner sep=0pt]
                 at ([xshift=30mm]frame.west)
                 {\includegraphics[height=100mm]{graphics/qr.pdf}};
                 \node[anchor=north, align=center] at ([yshift=8mm]qr.south) {arXiv:2605.04974};
                 \node[anchor=east, inner sep=0pt] at ([xshift=-30mm]frame.east)
-                {\includegraphics[height=100mm]{graphics/tu.pdf}};
+                {\includegraphics[height=100mm]{graphics/tu.pdf}};%
             },
     ]{
         name=title,
         column=1,
         span=2,
-        below=top,
+        below=top,%
     }{
         {\bfseries\Huge\setlength{\spaceskip}{0.3em}\UseName{@title}}\\
         \vspace{10mm}
@@ -180,7 +180,7 @@ A.\ Gleis\textsuperscript{5}
         name=problem,
         column=1,
         span=\lcol,
-        below=title,
+        below=title,%
     }{
         \begin{itemize}[leftmargin=*]
             \item Discrete single-impurity Anderson model $H = H_0 + H_1$ with
@@ -217,7 +217,7 @@ A.\ Gleis\textsuperscript{5}
         name=method,
         column*=2,
         span=\rcol,
-        below=title,
+        below=title,%
     }{
         \begin{itemize}[leftmargin=*]
             \item Define auxiliary operator $q \coloneq [c_\mathrm{imp}, H_1]$
@@ -276,7 +276,7 @@ A.\ Gleis\textsuperscript{5}
         name=numerical-discussion,
         column=1,
         span=\lcol,
-        below=problem,
+        below=problem,%
     }{
         \begin{itemize}
             \item Weight matrix
@@ -299,7 +299,7 @@ A.\ Gleis\textsuperscript{5}
         name=self-energy,
         column*=2,
         span=\rcol,
-        below=method,
+        below=method,%
     }{
         \begin{itemize}
             \item   Discrete self-energy spectrum
@@ -314,7 +314,7 @@ A.\ Gleis\textsuperscript{5}
         name=docc-and-qp,
         column*=2,
         span=\rcol,
-        below=self-energy,
+        below=self-energy,%
     }{
         \begin{itemize}
             \item Calculate analytical derivative with regularization $\lambda$
@@ -372,7 +372,7 @@ A.\ Gleis\textsuperscript{5}
         name=references,
         column*=2,
         span=\rcol,
-        between=docc-and-qp and bottom,
+        between=docc-and-qp and bottom,%
     }{
         \begin{itemize}[leftmargin=*]
             \item Self-energy is causal on the numerical level
@@ -385,7 +385,7 @@ A.\ Gleis\textsuperscript{5}
         name=references,
         column=1,
         span=\lcol,
-        between=moments and bottom,
+        between=moments and bottom,%
     }{
         \printbibliography[heading=none]
         \begin{itemize}
