@@ -184,17 +184,28 @@ A.\ Gleis\textsuperscript{5}
         below=title,
     }{
         \begin{itemize}[leftmargin=*]
+            \item Discrete single-impurity Anderson model $H = H_0 + H_1$ with
+                  \begin{align*}
+                      H_0
+                       & =
+                      \sum_j c_j^\dag E_j c_j
+                      + \sum_{j \neq \mathrm{imp}} c_\mathrm{imp}^\dag V_j^\dag c_j + c_j^\dag V_j c_\mathrm{imp}
+                      \qquad E_j, V_j \in \mathbb{C}^{N \times N} \\
+                      H_1
+                       & =
+                      \sum_{1234 \, \in \, \mathrm{imp}} U_{1234} c_1^\dag c_2^\dag c_3 c_4
+                      -  \sum_{12 \, \in \, \mathrm{imp}} U_{12}^\mathrm{MF} c_1^\dag c_2
+                  \end{align*}
             \item Correlators are described by \myemph{discrete spectral representation} (DSR)
                   \begin{equation*}
-                      G_0(z) = \frac{1}{z - E_0 - \underbrace{\sum_i V_i^\dag \frac{1}{z - E_i} V_i}_{\scalebox{1.0}{$\Delta(z)$}}}
+                      G_0(z) = \frac{1}{z - E_\mathrm{imp} - \underbrace{\sum_j V_j^\dag \frac{1}{z - E_j} V_j}_{\scalebox{1.0}{$\Delta_0(z)$}}}
                   \end{equation*}
-                  with energies $E_i \in \mathbb{C}^{N \times N}$
-                  and weights $W_i = V_i^\dag V_i \in \mathbb{C}^{N \times N}$
             \item \myemph{Dyson equation} does \myemph{not guarantee causality} numerically
             \item \myemph{Idea}: Use equation of motion to calculate DSR of self-energy
                   \begin{align*}
-                      \Sigma(z) = \Sigma^\HF + \sum_i \frac{W_i''}{z - E_i''}
+                      \Sigma(z) = \Sigma^\HF + \sum_j \frac{W_j''}{z - E_j''}
                   \end{align*}
+                  with weights $W_j'' = (V_j'')^\dag V_j''$
             \item \myemph{Goal}:
                   Benchmark different implementations
                   on the real axis
@@ -210,7 +221,7 @@ A.\ Gleis\textsuperscript{5}
         below=title,
     }{
         \begin{itemize}[leftmargin=*]
-            \item Use interacting Hamiltonian $H_1$ to define auxiliary operator $q \coloneq [c, H_1]$. \\
+            \item Use interacting Hamiltonian $H_1$ to define auxiliary operator $q \coloneq [c_\mathrm{imp}, H_1]$. \\
                   Calculate propagator
                   \begin{equation*}
                       \tG(z)
@@ -221,15 +232,15 @@ A.\ Gleis\textsuperscript{5}
                       \end{pmatrix}
                       \coloneq
                       \begin{pmatrix}
-                          \lehmann{c}{c^\dag} & \lehmann{c}{q^\dag} \\
-                          \lehmann{q}{c^\dag} & \lehmann{q}{q^\dag}
+                          \lehmann{c_\mathrm{imp}}{c_\mathrm{imp}^\dag} & \lehmann{c_\mathrm{imp}}{q^\dag} \\
+                          \lehmann{q}{c_\mathrm{imp}^\dag}              & \lehmann{q}{q^\dag}
                       \end{pmatrix}
                       \qquad
                   \end{equation*}
                   with Lehmann representation
                   $\lAngle A, B^\dag \rAngle \propto \sum_{mn} \sandwich{n}{A}{m} \sandwich{m}{B^\dag}{n}$ \\
                   and static term
-                  $\Sigma^\HF = \expval{\{c,q^\dag\}} = \expval{\{q,c^\dag\}}$
+                  $\Sigma^\HF = \expval{\{c_\mathrm{imp},q^\dag\}} = \expval{\{q,c_\mathrm{imp}^\dag\}}$
             \item \citeauthor{Kugler2022} showed~\cite{Kugler2022}
                   \begin{equation*}
                       \Sigma(z)
@@ -268,19 +279,21 @@ A.\ Gleis\textsuperscript{5}
         span=\lcol,
         below=problem,
     }{
-        Weight matrix
-        \begin{equation*}
-            \tS
-            =
-            -\frac{1}{\muppi} \int_{-\infty}^{\infty} \D\omega~\tG(\omega + \I0^+)
-            =
-            \begin{pmatrix}
-                \mathbb{1} & \Sigma^\HF            \\
-                \Sigma^\HF & \expval{\{q,q^\dag\}}
-            \end{pmatrix}
-            \succeq 0 \, .
-        \end{equation*}
-        Inversion, projection to 22 block, and reinversion preserve positive semidefiniteness.
+        \begin{itemize}
+            \item Weight matrix
+                  \begin{equation*}
+                      \tS
+                      =
+                      -\frac{1}{\muppi} \int_{-\infty}^{\infty} \D\omega~\tG(\omega + \I0^+)
+                      =
+                      \begin{pmatrix}
+                          \mathbb{1} & \Sigma^\HF            \\
+                          \Sigma^\HF & \expval{\{q,q^\dag\}}
+                      \end{pmatrix}
+                      \succeq 0 \, .
+                  \end{equation*}
+            \item Inversion, projection to 22 block, and reinversion preserve positive semidefiniteness.
+        \end{itemize}
     }
 
     \posterbox[adjusted title=Self-energy $\Sigma(\omega + \I0^+)$]{
@@ -289,7 +302,10 @@ A.\ Gleis\textsuperscript{5}
         span=\rcol,
         below=method,
     }{
-        Discrete self-energy spectrum $-\frac{1}{\muppi}\Im \Sigma(\omega + \I0^+) = \sum_i W_i'' \delta(\omega - E_i'')$
+        \begin{itemize}
+            \item   Discrete self-energy spectrum
+                  $-\frac{1}{\muppi}\Im \Sigma(\omega + \I0^+) = \sum_j W_j'' \delta(\omega - E_j'')$
+        \end{itemize}
         \begin{center}
             \input{graphics/self-energy-discrete/self-energy-discrete.tex}
         \end{center}
@@ -301,7 +317,9 @@ A.\ Gleis\textsuperscript{5}
         span=\rcol,
         below=self-energy,
     }{
-        Calculate analytical derivative
+        \begin{itemize}
+            \item Calculate analytical derivative with regularization $\lambda$
+        \end{itemize}
         \begin{equation*}
             Z
             =
