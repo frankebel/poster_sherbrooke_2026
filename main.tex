@@ -159,6 +159,14 @@ A.\ Gleis\textsuperscript{5}
     \posterbox[
         halign=center,
         valign=center,
+        overlay={
+                \node (qr) [anchor=west,inner sep=0pt]
+                at ([xshift=30mm]frame.west)
+                {\includegraphics[height=100mm]{graphics/qr.pdf}};
+                \node[anchor=north, align=center] at ([yshift=8mm]qr.south) {arXiv:2605.04974};
+                \node[anchor=east, inner sep=0pt] at ([xshift=-30mm]frame.east)
+                {\includegraphics[height=100mm]{graphics/tu.pdf}};
+            },
     ]{
         name=title,
         column=1,
