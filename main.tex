@@ -384,13 +384,22 @@ A.\ Gleis\textsuperscript{5}
         \end{itemize}
     }
 
-    \posterbox[adjusted title=References]{
+    \posterbox[adjusted title=References and Funding]{
         name=references,
         column=1,
         span=\lcol,
         between=moments and bottom,
     }{
         \printbibliography[heading=none]
+        \begin{itemize}
+            \item ``QUAST'' \foreignlanguage{german}{Deutsche Forschungsgemeinschaft}
+                  (DFG;\ Project ID FOR5249, Project No.\ 449872909)
+            \item Austrian Science Fund (FWF, Project DOI 10.55776/KIN2563725).
+        \end{itemize}
+        \begin{center}
+            \includegraphics[height=0.2\textwidth]{graphics/quast.png}
+            \includegraphics[height=0.2\textwidth]{graphics/fwf.pdf}
+        \end{center}
     }
 
 \end{tcbposter}
