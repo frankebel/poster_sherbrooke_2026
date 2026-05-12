@@ -36,6 +36,7 @@ A.\ Gleis\textsuperscript{5}
 \usepackage[warnings-off={mathtools-colon,mathtools-overbracket}]{unicode-math} % load after ams
 \unimathsetup{math-style=ISO}
 \setmathfont{Noto Sans Math}
+\usepackage{siunitx}
 
 % graphics, colors, captions, tables
 \usepackage{caption}
@@ -80,6 +81,7 @@ A.\ Gleis\textsuperscript{5}
 \pgfplotstableset{col sep=comma}
 \usepackage[labelformat=simple]{subcaption}
 \usepackage{tabularx}
+\usepackage{booktabs}
 \usepackage{tikz}
 \usetikzlibrary{
     arrows.meta,
@@ -332,6 +334,43 @@ A.\ Gleis\textsuperscript{5}
         \end{center}
     }
 
+    \posterbox[adjusted title=Moments of Green's function and self-energy]{
+        name=moments,
+        column=1,
+        span=\lcol,
+        below=numerical-discussion,%
+    }{
+        \begin{itemize}
+            \item Moments of correlator $C(z)$ are
+                  \begin{equation*}
+                      S_n^{(C)}
+                      =
+                      -\frac{1}{\muppi} \int_{-\infty}^{\infty} \D\omega~\omega^n \Im C(\omega+\I0^+) \, .
+                  \end{equation*}
+            \item Relative deviation from analytical values.
+                  \begin{center}
+                      \begin{tabular}{@{}
+                              S[table-format=1]
+                              S[table-format=-1.1e-2, table-number-alignment=right]
+                              S[table-format=-1.1e-2, table-number-alignment=right]
+                              S[table-format=-1.1e-2, table-number-alignment=right]
+                              @{}}
+                          \toprule
+                          {$U/D$} & \multicolumn{1}{c}{$\delta S_0^{(G)}$} & {$\delta S_2^{(G)}$} & {$\delta S_0^{(\Sigma)}$} \\
+                          \midrule
+                          2       & 1.1e-15                                & 1.2e-8               & 1.3e-14                   \\
+                          4       & 6.7e-16                                & 1.4e-10              & 3.2e-15                   \\
+                          \midrule
+                          {$U/D$} & {$\Sigma^\HF/D$}                       & {$S_1^{(G)}/D$}      & {$S_1^{(\Sigma)}/D^3$}    \\
+                          \midrule
+                          2       & 5.3e-8                                 & 5.3e-8               & -1.8e-7                   \\
+                          4       & 1.0e-8                                 & -2.0e-8              & 6.5e-8                    \\
+                          \bottomrule
+                      \end{tabular}
+                  \end{center}
+        \end{itemize}
+    }
+
     \posterbox[adjusted title=Conclusion]{
         name=references,
         column*=2,
@@ -349,7 +388,7 @@ A.\ Gleis\textsuperscript{5}
         name=references,
         column=1,
         span=\lcol,
-        between=numerical-discussion and bottom,
+        between=moments and bottom,
     }{
         \printbibliography[heading=none]
     }
