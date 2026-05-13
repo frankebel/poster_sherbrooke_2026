@@ -1,0 +1,36 @@
+\begin{tikzpicture}[
+        scale=2,
+        line width = 1.2mm
+    ]
+    % G0
+    \node (G0) [inner sep=0pt] at (0cm, 0cm) {$-\Im G_0^{-1}$};
+    \node[right = 0.6\textwidth of G0] (omegaG0) [inner sep=0pt] {$\omega$};
+    \draw[->]  ([xshift=10mm]G0.east) -- ([xshift=-2mm]omegaG0.west);
+    \draw[->]  ([xshift=15mm]G0.east) -- ++(0cm, 10mm);
+    \draw[->]  ([xshift=40mm]G0.east) -- ++(0cm, 8mm);
+    \draw[->]  ([xshift=71mm]G0.east) -- ++(0cm, 4mm);
+    \draw[->]  ([xshift=73mm]G0.east) -- ++(0cm, 4mm);
+
+    % G0
+    \node (G)[below = 3.5em of G0] [inner sep=0pt] {$-\Im G^{-1}$};
+    \node[right = 0.6\textwidth of G] (omegaG) [inner sep=0pt] {$\omega$};
+    \draw[->]  ([xshift=10mm]G.east) -- ([xshift=-2mm]omegaG.west);
+    \draw[->]  ([xshift=15mm]G.east) -- ++(0cm, 6mm);
+    \draw[->]  ([xshift=45mm]G.east) -- ++(0cm, 8mm);
+    \draw[->]  ([xshift=72mm]G.east) -- ++(0cm, 6mm);
+
+    % Sigma
+    \node (Sigma)[below = 3.5em of G] [inner sep=0pt] {$-\Im \Sigma\phantom{^{-1}}$};
+    \node[right = 0.6\textwidth of Sigma] (omegaSigma) [inner sep=0pt] {$\omega$};
+    \draw[->]  ([xshift=10mm]Sigma.east) -- ([xshift=-2mm]omegaSigma.west);
+    \draw[->]  ([xshift=15mm]Sigma.east) -- ++(0cm, 4mm);
+    \draw[->]  ([xshift=40mm]Sigma.east) -- ++(0cm, 8mm);
+    \draw[->]  ([xshift=45mm]Sigma.east) -- ++(0cm, -8mm);
+    \draw[->]  ([xshift=71mm]Sigma.east) -- ++(0cm, 4mm);
+    \draw[->]  ([xshift=72mm]Sigma.east) -- ++(0cm, -6mm);
+    \draw[->]  ([xshift=73mm]Sigma.east) -- ++(0cm, 4mm);
+
+    % algebra
+    \node at ($(G0)+(40mm, -10mm)$) {$-$};
+    \node at ($(G)+(40mm, -10mm)$) {$=$};
+\end{tikzpicture}
