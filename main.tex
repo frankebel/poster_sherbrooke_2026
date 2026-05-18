@@ -3,11 +3,11 @@
 \usepackage[a0paper,portrait]{geometry}
 \usepackage[poster]{tcolorbox}
 \pagestyle{empty}
-\def\lcol{0.8} % width of left column
-\def\rcol{1.2} % width of right column
+\def\lcol{0.9} % width of left column
+\def\rcol{1.1} % width of right column
 
 
-\title{Discrete self-energy\\ in real-frequency DMFT}
+\title{\texorpdfstring{Discrete self-energy\\ in real-frequency DMFT}{Discrete self-energy in real-frequency DMFT}}
 \author{
 A.\ Zacinskis\textsuperscript{1},
 \underline{F.\ T.\ Ebel}\textsuperscript{2*},
@@ -112,9 +112,11 @@ A.\ Gleis\textsuperscript{5}
 \newcommand{\ps}{\vphantom{*}}
 \newcommand{\D}{\mathrm{d}}
 \newcommand{\HF}{\mathrm{H}}
+\newcommand{\kB}{k_\mathrm{B}} % Boltzmann constant
+\newcommand{\E}{\mathrm{e}}
 \newcommand{\I}{\mathrm{i}}
+\newcommand{\imp}{\mathrm{imp}}
 \newcommand{\tG}{\widetilde{G}}
-\newcommand{\tS}{\widetilde{S}}
 \newcommand{\myemph}[1]{\textbf{#1}} % custom emphasize
 
 % bra-ket
@@ -178,7 +180,7 @@ A.\ Gleis\textsuperscript{5}
         \end{tabular}
     }
 
-    \posterbox[adjusted title=(1) Problem]{
+    \posterbox[adjusted title= (1) Problem]{
         name=problem,
         column=1,
         span=\lcol,
@@ -189,77 +191,89 @@ A.\ Gleis\textsuperscript{5}
                   \begin{align*}
                       H_0
                        & =
-                      \sum_\sigma \epsilon_\mathrm{imp} n_{\mathrm{imp},\sigma}
+                      \sum_\sigma \epsilon_\imp n_{\imp,\sigma}
                       +
                       \sum_{j,\sigma} \epsilon_j n_{j,\sigma}
-                      + \sum_{j,\sigma} V_j \left( c_{\mathrm{imp},\sigma}^\dag c_{j,\sigma} + \mathrm{h. c.}\right) \, , \\
+                      + \sum_{j,\sigma} V_j \left( c_{\imp,\sigma}^\dag c_{j,\sigma} + \mathrm{h. c.}\right) \\
                       H_1
                        & =
-                      U n_{\mathrm{imp},\uparrow}n_{\mathrm{imp},\downarrow}  \, .
+                      U n_{\imp,\uparrow}n_{\imp,\downarrow}
                   \end{align*}
-            \item Correlators are described by \myemph{discrete spectral representation} (DSR)
+            \item Bath described by \myemph{discrete spectral representation} (DSR)
                   \begin{equation*}
                       G_0^{-1}(\omega) = \omega - \epsilon_\mathrm{imp} - \Delta_0(\omega)
                   \end{equation*}
                   with
                   \begin{equation*}
-                      \Delta_0(\omega) = \sum_j \frac{V_j^2}{\omega + \I0^+ - \epsilon_j} \, .
+                      \Delta_0(\omega) = \sum_j \frac{V_j^2}{\omega + \I0^+ - \epsilon_j}
                   \end{equation*}
             \item \myemph{Dyson equation} $\Sigma(\omega) = G_0^{-1}(\omega) - G^{-1}(\omega)$
-                  does \myemph{not guarantee} $-\Im \Sigma(\omega) \ge 0$ numerically.
+                  does \myemph{not guarantee} $-\Im \Sigma(\omega) \ge 0$ \myemph{numerically}.
                   \begin{center}
                       \input{graphics/dyson-eq/dyson-eq.tex}
                   \end{center}
-            \item \myemph{Idea}: Use equation of motion to calculate \myemph{DSR} of self-energy
+            \item \myemph{Idea}: Use improved symmetric estimator~\cite{Kaufmann2019, Kugler2022}
+                  to calculate \myemph{DSR} of self-energy
                   \begin{align*}
                       \Sigma(\omega) = \Sigma^\HF + \sum_i \frac{w_i}{\omega + \I0^+ - \epsilon_i}
                   \end{align*}
-                  guaranteeing weights $w_i \ge 0$.
+                  guaranteeing weights $w_i \ge 0$
             \item \myemph{Goal}:
                   Benchmark different implementations
                   on the real axis
                   at $T=0$
-                  on the $d \to \infty$ Bethe lattice.
+                  on the $d \to \infty$ Bethe lattice
         \end{itemize}
     }
 
-    \posterbox[adjusted title=(2) Method]{
+    \posterbox[adjusted title= (2) Method]{
         name=method,
         column*=2,
         span=\rcol,
         below=title,%
     }{
         \begin{itemize}[leftmargin=*]
-            \item Define auxiliary operator $q \coloneq [c_\mathrm{imp}, H_1]$
+            \item Define auxiliary operator $q \coloneq [c_\imp, H_1]$
                   and calculate propagator
                   \begin{equation*}
-                      \tG(z)
+                      \tG(\omega)
                       \coloneq
                       \begin{pmatrix}
                           G_{11} & G_{12} \\
                           G_{21} & G_{22}
                       \end{pmatrix}
-                      \coloneq
+                      =
                       \begin{pmatrix}
-                          \lehmann{c_\mathrm{imp}}{c_\mathrm{imp}^\dag} & \lehmann{c_\mathrm{imp}}{q^\dag} \\
-                          \lehmann{q}{c_\mathrm{imp}^\dag}              & \lehmann{q}{q^\dag}
+                          \lehmann{c_\imp}{c_\imp^\dag} & \lehmann{c_\imp}{q^\dag} \\
+                          \lehmann{q}{c_\imp^\dag}      & \lehmann{q}{q^\dag}
                       \end{pmatrix}
                       \qquad
                   \end{equation*}
                   with Lehmann representation
-                  $\lAngle A, B^\dag \rAngle \propto \sum_{mn} \sandwich{n}{A}{m} \sandwich{m}{B^\dag}{n}$ \\
+                  \begin{align*}
+                      \lehmann{A}{B^\dag}
+                      =
+                      \frac{1}{Z}
+                      \sum_s
+                      \E^{-\frac{\epsilon_s}{\kB T}} \>
+                      \Bigg( &
+                      \sandwich*{s}{A \frac{1}{\omega + \I0^+ - H + \epsilon_s} B^\dag}{s} \\
+                      +      &
+                      \sandwich*{s}{B^\dag \frac{1}{\omega + \I0^+ + H - \epsilon_s} A}{s}
+                      \Bigg)
+                  \end{align*}
                   and static term
-                  $\Sigma^\HF = \expval{\{c_\mathrm{imp},q^\dag\}} = \expval{\{q,c_\mathrm{imp}^\dag\}}$.
+                  $\Sigma^\HF = \expval{\{c_\mathrm{imp},q^\dag\}} = \expval{\{q,c_\mathrm{imp}^\dag\}}$
             \item \citeauthor{Kugler2022} showed~\cite{Kugler2022}
                   \begin{equation*}
-                      \Sigma(z)
+                      \Sigma(\omega)
                       =
-                      \Sigma^\HF + G_{22}  - G_{21} \frac{1}{G_{11}} G_{12} \, .
+                      \Sigma^\HF + G_{22}  - G_{21} \frac{1}{G_{11}} G_{12}
                   \end{equation*}
             \item \myemph{New Method}: Use Schur complement
                   \begin{equation*}
                       \left[
-                          \tG^{-1}(z)
+                          \tG^{-1}(\omega)
                           \right]_{22}
                       =
                       \left[
@@ -277,12 +291,12 @@ A.\ Gleis\textsuperscript{5}
                   \begin{equation*}
                       \Sigma(z)
                       =
-                      \Sigma^\HF + \left( \bigl[\tG^{-1}(z) \bigr]_{22} \right)^{-1} \, .
+                      \Sigma^\HF + \left( \bigl[\tG^{-1}(\omega) \bigr]_{22} \right)^{-1}
                   \end{equation*}
         \end{itemize}
     }
 
-    \posterbox[adjusted title=(3) DMFT Self-energy $\Sigma(\omega)$]{
+    \posterbox[adjusted title= (3) DMFT Self-energy $\Sigma(\omega)$]{
         name=self-energy,
         column*=2,
         span=\rcol,
@@ -291,14 +305,14 @@ A.\ Gleis\textsuperscript{5}
         \begin{itemize}
             \item   Discrete self-energy spectrum
                   $-\frac{1}{\muppi}\Im \Sigma(\omega) = \sum_j w_j \delta(\omega - \epsilon_j)$
-                  for half-bandwidth $D$
+                  for the Bethe lattice with half-bandwidth $D$
         \end{itemize}
         \begin{center}
             \input{graphics/self-energy-discrete/self-energy-discrete.tex}
         \end{center}
     }
 
-    \posterbox[adjusted title=(4) Double occupation and quasiparticle weight]{
+    \posterbox[adjusted title= (4) Double occupation and quasiparticle weight]{
         name=docc-and-qp,
         column*=2,
         span=\rcol,
@@ -319,7 +333,7 @@ A.\ Gleis\textsuperscript{5}
         \end{center}
     }
 
-    \posterbox[adjusted title=(5) Validation: moments]{
+    \posterbox[adjusted title= (5) Validation: moments]{
         name=moments,
         column=1,
         span=\lcol,
@@ -356,16 +370,16 @@ A.\ Gleis\textsuperscript{5}
         \end{itemize}
     }
 
-    \posterbox[adjusted title=(6) Conclusion]{
+    \posterbox[adjusted title= (6) Conclusion]{
         name=references,
         column*=2,
         span=\rcol,
         between=docc-and-qp and bottom,%
     }{
         \begin{itemize}[leftmargin=*]
-            \item Self-energy is causal on the numerical level.
-            \item Real-frequency DMFT without any broadening.
-            \item Outlook: Calculate realistic materials.
+            \item Self-energy is causal also on the numerical level
+            \item Real-frequency DMFT without any broadening
+            \item Outlook: Calculate realistic materials
         \end{itemize}
     }
 
@@ -379,9 +393,8 @@ A.\ Gleis\textsuperscript{5}
         \begin{itemize}
             \item ``QUAST'' \foreignlanguage{german}{Deutsche Forschungsgemeinschaft}
                   (DFG;\ Project ID FOR5249, Project No.\ 449872909)
-            \item Austrian Science Fund (FWF, Project DOI 10.55776/KIN2563725).
+            \item Austrian Science Fund (FWF, Project DOI 10.55776/KIN2563725)
         \end{itemize}
-        \vspace{20mm}
         \begin{center}
             \includegraphics[height=0.2\textwidth]{graphics/quast.png}
             \includegraphics[height=0.2\textwidth]{graphics/fwf.pdf}
