@@ -7,7 +7,7 @@
 \def\rcol{1.2} % width of right column
 
 
-\title{Causal self-energy without broadening}
+\title{Discrete self-energy\\ in real-frequency DMFT}
 \author{
 A.\ Zacinskis\textsuperscript{1},
 \underline{F.\ T.\ Ebel}\textsuperscript{2*},
@@ -74,7 +74,6 @@ A.\ Gleis\textsuperscript{5}
 }
 \usepackage{pgfplotstable}
 \pgfplotstableset{col sep=comma}
-\usepackage[labelformat=simple]{subcaption}
 \usepackage{tabularx}
 \usepackage{booktabs}
 \usepackage{tikz}
@@ -112,7 +111,7 @@ A.\ Gleis\textsuperscript{5}
 \newcommand{\pdag}{\vphantom{\dag}}
 \newcommand{\ps}{\vphantom{*}}
 \newcommand{\D}{\mathrm{d}}
-\newcommand{\HF}{\mathrm{HF}}
+\newcommand{\HF}{\mathrm{H}}
 \newcommand{\I}{\mathrm{i}}
 \newcommand{\tG}{\widetilde{G}}
 \newcommand{\tS}{\widetilde{S}}
@@ -179,7 +178,7 @@ A.\ Gleis\textsuperscript{5}
         \end{tabular}
     }
 
-    \posterbox[adjusted title=Problem]{
+    \posterbox[adjusted title=(1) Problem]{
         name=problem,
         column=1,
         span=\lcol,
@@ -190,31 +189,32 @@ A.\ Gleis\textsuperscript{5}
                   \begin{align*}
                       H_0
                        & =
-                      \sum_\sigma \epsilon_\mathrm{imp} n_{\mathrm{imp}\sigma}
+                      \sum_\sigma \epsilon_\mathrm{imp} n_{\mathrm{imp},\sigma}
                       +
-                      \sum_{j\sigma} \epsilon_j n_{j\sigma}
-                      + \sum_{j\sigma} V_j \left( c_{\mathrm{imp}\sigma}^\dag c_{j\sigma} + \mathrm{h. c.}\right) \, , \\
+                      \sum_{j,\sigma} \epsilon_j n_{j,\sigma}
+                      + \sum_{j,\sigma} V_j \left( c_{\mathrm{imp},\sigma}^\dag c_{j,\sigma} + \mathrm{h. c.}\right) \, , \\
                       H_1
                        & =
-                      U n_{\mathrm{imp}\uparrow}n_{\mathrm{imp}\downarrow}  \, .
+                      U n_{\mathrm{imp},\uparrow}n_{\mathrm{imp},\downarrow}  \, .
                   \end{align*}
             \item Correlators are described by \myemph{discrete spectral representation} (DSR)
                   \begin{equation*}
-                      G_0^{-1}(z) = z - \epsilon_\mathrm{imp} - \Delta_0(z)
+                      G_0^{-1}(\omega) = \omega - \epsilon_\mathrm{imp} - \Delta_0(\omega)
                   \end{equation*}
                   with
                   \begin{equation*}
-                      \Delta_0(z) = \sum_j \frac{V_j^2}{z - \epsilon_j} \, .
+                      \Delta_0(\omega) = \sum_j \frac{V_j^2}{\omega + \I0^+ - \epsilon_j} \, .
                   \end{equation*}
-            \item \myemph{Dyson equation} does \myemph{not guarantee} $-\Im \Sigma(\omega) \ge 0$ numerically.
+            \item \myemph{Dyson equation} $\Sigma(\omega) = G_0^{-1}(\omega) - G^{-1}(\omega)$
+                  does \myemph{not guarantee} $-\Im \Sigma(\omega) \ge 0$ numerically.
                   \begin{center}
                       \input{graphics/dyson-eq/dyson-eq.tex}
                   \end{center}
-            \item \myemph{Idea}: Use equation of motion to calculate DSR of self-energy
+            \item \myemph{Idea}: Use equation of motion to calculate \myemph{DSR} of self-energy
                   \begin{align*}
-                      \Sigma(z) = \Sigma^\HF + \sum_i \frac{w_i}{z - \epsilon_i}
+                      \Sigma(\omega) = \Sigma^\HF + \sum_i \frac{w_i}{\omega + \I0^+ - \epsilon_i}
                   \end{align*}
-                  guaranteeing $w_i \ge 0$.
+                  guaranteeing weights $w_i \ge 0$.
             \item \myemph{Goal}:
                   Benchmark different implementations
                   on the real axis
@@ -223,7 +223,7 @@ A.\ Gleis\textsuperscript{5}
         \end{itemize}
     }
 
-    \posterbox[adjusted title=Method]{
+    \posterbox[adjusted title=(2) Method]{
         name=method,
         column*=2,
         span=\rcol,
@@ -282,7 +282,7 @@ A.\ Gleis\textsuperscript{5}
         \end{itemize}
     }
 
-    \posterbox[adjusted title=Self-energy $\Sigma(\omega)$]{
+    \posterbox[adjusted title=(3) DMFT Self-energy $\Sigma(\omega)$]{
         name=self-energy,
         column*=2,
         span=\rcol,
@@ -291,13 +291,14 @@ A.\ Gleis\textsuperscript{5}
         \begin{itemize}
             \item   Discrete self-energy spectrum
                   $-\frac{1}{\muppi}\Im \Sigma(\omega) = \sum_j w_j \delta(\omega - \epsilon_j)$
+                  for half-bandwidth $D$
         \end{itemize}
         \begin{center}
             \input{graphics/self-energy-discrete/self-energy-discrete.tex}
         \end{center}
     }
 
-    \posterbox[adjusted title=Double occupation and quasiparticle weight]{
+    \posterbox[adjusted title=(4) Double occupation and quasiparticle weight]{
         name=docc-and-qp,
         column*=2,
         span=\rcol,
@@ -318,18 +319,18 @@ A.\ Gleis\textsuperscript{5}
         \end{center}
     }
 
-    \posterbox[adjusted title=Validation: moments]{
+    \posterbox[adjusted title=(5) Validation: moments]{
         name=moments,
         column=1,
         span=\lcol,
         below=problem,%
     }{
         \begin{itemize}
-            \item Moments of correlator $C(z)$ are
+            \item Moments of correlator $C \in \{\Sigma, G\}$ are
                   \begin{equation*}
                       S_n^{(C)}
                       \coloneq
-                      -\frac{1}{\muppi} \int_{-\infty}^{\infty} \D\omega~\omega^n \> \Im C(\omega+\I0^+) \, .
+                      -\frac{1}{\muppi} \int_{-\infty}^{\infty} \D\omega~\omega^n \> \Im C(\omega) \, .
                   \end{equation*}
             \item (Relative) deviation from analytical values
                   \begin{center}
@@ -355,7 +356,7 @@ A.\ Gleis\textsuperscript{5}
         \end{itemize}
     }
 
-    \posterbox[adjusted title=Conclusion]{
+    \posterbox[adjusted title=(6) Conclusion]{
         name=references,
         column*=2,
         span=\rcol,
